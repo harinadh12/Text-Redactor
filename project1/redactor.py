@@ -91,7 +91,7 @@ def redact_dates(input_data):
                 data = replace_data.sub("\u2588" * len(m),data)
             masked_data.append(data)
         
-        print("******************",masked_data)
+        print("".join(masked_data))
         return masked_data
 
         #dates_list = []
