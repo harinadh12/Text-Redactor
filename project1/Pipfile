@@ -8,8 +8,12 @@ nltk = "*"
 spacy = "*"
 datefinder = "*"
 date-extractor = "*"
+phonenumbers = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
+
+[packages.fuzzywuzzy]
+extras = [ "speedup",]

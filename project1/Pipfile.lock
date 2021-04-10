@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e03b61a9b6e841b6708258abc6b0b8cd286a6cd21cd94dfb88d63b1b9454fd34"
+            "sha256": "3c0808455281e5512136e0217ca677baedb1e5012c1c24f6b60677ba5351fa9f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -93,6 +93,14 @@
             ],
             "index": "pypi",
             "version": "==0.7.1"
+        },
+        "fuzzywuzzy": {
+            "hashes": [
+                "sha256:45016e92264780e58972dca1b3d939ac864b78437422beecebb3095f8efd00e8",
+                "sha256:928244b28db720d1e0ee7587acf660ea49d7e4c632569cad4f1cd7e68a5f0993"
+            ],
+            "index": "pypi",
+            "version": "==0.18.0"
         },
         "idna": {
             "hashes": [
@@ -245,6 +253,14 @@
             ],
             "version": "==0.4.0"
         },
+        "phonenumbers": {
+            "hashes": [
+                "sha256:271f26271338616460eef8b878e5879401299adfc0cd0891c48b4744afbb45b2",
+                "sha256:7d66d6f09541568941e51fe2275de0f2d519b3234c80c8c166c56d01d098d3fc"
+            ],
+            "index": "pypi",
+            "version": "==8.12.21"
+        },
         "preshed": {
             "hashes": [
                 "sha256:12cbe1e378b4f1c6b06f5e4130408befe916e55ea1616e6aa63c5cd0ccd9c927",
@@ -307,6 +323,12 @@
                 "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"
             ],
             "version": "==2.8.1"
+        },
+        "python-levenshtein": {
+            "hashes": [
+                "sha256:dc2395fbd148a1ab31090dd113c366695934b9e85fe5a4b2a032745efd0346f6"
+            ],
+            "version": "==0.12.2"
         },
         "pytz": {
             "hashes": [

@@ -33,10 +33,12 @@ if __name__ == "__main__":
         input_data = redactor.redact_gender(input_data)
 
     if args.concept:
-        input_data = redactor.redact_concept(input_data)
+        input_data = redactor.redact_concept(input_data, args.concept)
         
-    
+    if args.output:
+        redactor.output(args.input,data,args.output)
+
     if args.stats:
-        pass
+        redactor.get_stats()
 
     
