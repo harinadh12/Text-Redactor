@@ -1,6 +1,6 @@
 import pytest
 
-def test_phone():
+def test_redact_gender():
     files = [['*.txt']]
     data= handle_input_files(files)
     mask_data  = redactor.redact_gender(data)
