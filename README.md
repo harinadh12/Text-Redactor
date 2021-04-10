@@ -1,5 +1,3 @@
-# cs5293sp21-project1
-
 The Redactor
 
 Author :  Harinadh Appidi
@@ -83,5 +81,8 @@ test_redact_concept.py
 To run test cases, navigate to the tests folder and run pipenv run python -m pytest
 To run the project, navigate to project1 folder and run the below command.
 	pipenv run python main.py --input '*.txt' --names --dates --phones --genders --concept 'court' --output 'files' --stats stderr.
+
+
+
 
 
