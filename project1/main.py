@@ -36,9 +36,10 @@ if __name__ == "__main__":
         input_data = redactor.redact_concept(input_data, args.concept)
         
     if args.output:
-        redactor.output(args.input,data,args.output)
+        redactor.get_output(args.input, input_data, args.output)
 
     if args.stats:
-        redactor.get_stats()
+        
+        redactor.write_stats()
 
     

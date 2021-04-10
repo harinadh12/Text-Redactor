@@ -23,6 +23,10 @@ import phonenumbers
 LOGGER = logging.getLogger("REDACT_APP")
 
 nlp = spacy.load('en_core_web_sm')
+#import en_core_web_sm
+#nlp = en_core_web_sm.load()
+
+stats_list = []
 
 def handle_input_files(files):
     try:
@@ -68,7 +72,12 @@ def redact_names(input_data):
                 for name in names_list:
                     data = data.replace(name,"\u2588" * len(name))
                 masked_data.append(data)
+                string = "redact_names"
+                get_stats(string,len(names_list))
+                names_list.clear()
+
             #print("*****************",masked_data)
+            
             return masked_data
 
     except Exception as error:
@@ -85,9 +94,9 @@ def redact_dates(input_data):
             doc = nlp(data)
             for d in doc.ents:
                 if d.label_ == "DATE" and len(d.text) > 2:
-                    #print(d.text,d.label_)
+                    
                     dates_list.append(d.text)
-            #print("**********dates list*************",dates_list)
+            
             for date in dates_list:
                 data = data.replace(date,"\u2588" * len(date))
 
@@ -96,15 +105,14 @@ def redact_dates(input_data):
                 replace_data = re.compile(re.escape(' ' + m + ' '), re.IGNORECASE)
                 data = replace_data.sub("\u2588" * len(m),data)
             masked_data.append(data)
-        
-        print("".join(masked_data))
+            
+            string = "redact_dates"
+            get_stats(string,len(dates_list))
+            dates_list.clear()
+
+    
         return masked_data
-
-        #dates_list = []
-        #for data in input_data:
-            #dates = extract_dates(data)
-            #print(dates)
-
+        
     except Exception as error:
         LOGGER.exception("Exception in redact names method")
         raise error
@@ -121,13 +129,17 @@ def redact_phones(input_data):
             for phn in phn_list:
                 data = data.replace(phn,"\u2588" * len(phn))
             mask_phns.append(data)
-        print(mask_phns)
+            
+            string = "redact_phones"
+            get_stats(string,len(phn_list))
+            phn_list.clear()
 
+        
         return mask_phns
             
             
     except Exception as error:
-        LOGGER.exception("Exception in redact names method")
+        LOGGER.exception("Exception in redact phones method")
         raise error
 
 def redact_gender(input_data):
@@ -151,10 +163,17 @@ def redact_gender(input_data):
             
             for g in gender_list:
                 data = data.replace( g + ' ',"\u2588" * len(g))
+
+            string = "redact_gender"
+            #print("****************",gender_list)
+            get_stats(string,len(gender_list))
+            gender_list.clear()
+
             mask_genders.append(data)
 
+        return mask_genders
     except Exception as error:
-        LOGGER.exception("Exception in redact genders method")
+        LOGGER.exception("Exception in redact gender method")
         raise error
 
 def redact_concept(input_data,concepts):
@@ -181,9 +200,79 @@ def redact_concept(input_data,concepts):
                         data = data.replace(str(sents),u"\u2588"*len(str(sents)))
             
             mask_data.append(data)
+
+        string = "redact_concept"
+        get_stats(string, len(all_syns))
+        
         
         return mask_data
                         
     except Exception as error:
-        LOGGER.exception("Exception in redact concepts method")
+        LOGGER.exception("Exception in redact concept method")
+        raise error
+
+def get_stats(redacted_type = None, count = 0):
+    try:
+    
+        temp = "The word count of  " + redacted_type + " : " + str (count)
+        stats_list.append(temp)
+        
+        return stats_list
+
+    except Exception as error:
+        LOGGER.exception("Exception in stats() method")
+        raise error
+
+def write_stats(stats_list=stats_list):
+    try:
+        path = ('./stderr/stderr.txt')
+    
+        file = open(path, "w", encoding="utf-8")
+        for i in range(len(stats_list)):
+            file.write(stats_list[i])
+            file.write("\n")
+        file.close()
+        
+        return stats_list
+
+    except Exception as error:
+        LOGGER.exception("Exception in write_stats method")
+        raise error
+
+def get_output(input_files,input_data,output_path):
+    
+    try:
+        filenames =[]
+        files = nltk.flatten(input_files)
+        for i in range(len(files)):
+            input_files = glob.glob(files[i])
+        
+            for j in range(len(input_files)):
+                if '.txt' in  input_files[j]:
+                    input_files[j] = input_files[j].replace(".txt", ".redacted")
+                if '.md' in input_files[j]:
+                    input_files[j] = input_files[j].replace(".md", ".redacted")
+                if '\\' in input_files[j]:
+                    input_files[j]= input_files[j].split("\\")
+                    input_files[j] = input_files[j][1]
+                
+                filenames.append(input_files[j])
+
+        for i in range(len(input_data)):
+            for j in range(len(filenames)):
+                if i==j:
+                    file_data = input_data[i]
+                    
+                    path1 = (os.getcwd())
+            
+                    path2 = (output_path+'/'+filenames[j])
+                    final_file = open(os.path.join(path1,path2), "w" ,encoding="utf-8")
+                    
+                    final_file.write(file_data)
+                    final_file.close()
+                    
+        return len(filenames)
+
+    except Exception as error:
+        LOGGER.exception("Exception in write_stats method")
         raise error

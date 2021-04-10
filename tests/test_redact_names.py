@@ -6,12 +6,13 @@ def test_redact_names():
     files = [['*.txt']]
     data = redactor.handle_input_files(files)
     mask_data = redactor.redact_names(data)
+    if isinstance(mask_data,list):
+        mask_str = ''.join(mask_data)
     
-    assert isinstance(mask_data,list)
+    if '\u2588' in mask_str:
+        count += 1
+
+    assert count >= 1
 
     
-    #if mask_data:
-       # assert True
-    #else:
-       # assert False
 

@@ -1,8 +1,16 @@
-mport pytest
+import pytest
+from project1 import redactor
 
 def test_redact_concept():
-    files = [['*.txt']]
-    data= handle_input_files(files)
+    
     concept = ['court','state']
-    mask_data  = redactor.redact_concept(data, concept)
-    assert isinstance(mask_data,list)
+    
+    count = 0
+    files = [['*.txt']]
+    data= redactor.handle_input_files(files)
+    mask_data  = redactor.redact_concept(data,concept)
+    if isinstance(mask_data,list):
+        mask_str = ''.join(mask_data)
+        if '\u2588' in mask_str:
+            count += 1
+    assert count >= 1
