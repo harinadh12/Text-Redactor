@@ -7,7 +7,7 @@ def test_redact_names():
     data = redactor.handle_input_files(files)
     mask_data = redactor.redact_names(data)
     
-    assert mask_data is not None
+    assert isinstance(mask_data,list)
 
     
     #if mask_data:
