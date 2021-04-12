@@ -191,7 +191,6 @@ def redact_concept(input_data,concepts):
         for i in concepts:
             all_syns.append(i)
         
-        print("\n",concepts)
         mask_data = []
         for data in input_data:
             doc = nlp(data)
@@ -200,7 +199,7 @@ def redact_concept(input_data,concepts):
                     if concept in str(sents):
                         
                         data = data.replace(str(sents),"\n"+ u"\u2588"*len(str(sents)))
-                        print("\n",data,"\n")
+                        
             mask_data.append(data)
 
         string = "redact_concept"
