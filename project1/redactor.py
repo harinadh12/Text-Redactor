@@ -13,7 +13,7 @@ from nltk import ne_chunk
 from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 
-from nltk.tag.stanford import StanfordNERTagger
+#from nltk.tag.stanford import StanfordNERTagger
 
 import glob
 import nltk
