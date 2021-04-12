@@ -87,7 +87,7 @@ def redact_names(input_data):
 
 def redact_dates(input_data):
     try:
-        from date_extractor import extract_dates
+        
         dates_list = []
         masked_data = []
         for data in input_data:
@@ -162,7 +162,7 @@ def redact_gender(input_data):
                         gender_list.append(d)
             
             for g in gender_list:
-                data = data.replace( g + ' ',"\u2588" * len(g))
+                data = data.replace( ' '+g + ' ',"\u2588" * len(g))
 
             string = "redact_gender"
             #print("****************",gender_list)
@@ -191,14 +191,16 @@ def redact_concept(input_data,concepts):
         for i in concepts:
             all_syns.append(i)
         
+        print("\n",concepts)
         mask_data = []
         for data in input_data:
             doc = nlp(data)
             for sents in doc.sents:
                 for concept in all_syns:
                     if concept in str(sents):
-                        data = data.replace(str(sents),u"\u2588"*len(str(sents)))
-            
+                        
+                        data = data.replace(str(sents),"\n"+ u"\u2588"*len(str(sents)))
+                        print("\n",data,"\n")
             mask_data.append(data)
 
         string = "redact_concept"
