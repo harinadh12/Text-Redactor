@@ -1,4 +1,4 @@
-The Redactor
+                                                                    The Redactor
 
 Author :  Harinadh Appidi
 This project has been implemented in python and can be run from command line with the below command.
@@ -65,7 +65,13 @@ This method is used to write the redaction type and number of words redacted in 
 get_output(input_files,input_data,output_path):
 	This method is used to write the output data after all the redaction steps into a .redacted file in the output path.
 	A corresponding .redacted file w.r.t a input .txt file is written at the output path.
-
+write_stats():
+	In this method, all the stats of redact type and number of words redacted are written in stderr/stderr.txt file.
+	The path is hardcoded so that whenever --stats flag is used in input this method gets called and all the stats are written to the sterr.txt file.
+get_output():
+	In this method the redacted data is written in the folder path specified in the input for the flag --output.
+	The output is written to the .redacted files with same name as innput text file.
+	
 Test Cases
 	test_redact_names.py
 •	This method is used to test redact names functionality. It asserts true if at least 1 word is masked.

@@ -266,7 +266,14 @@ def get_output(input_files,input_data,output_path):
                     path1 = (os.getcwd())
             
                     path2 = (output_path+'/'+filenames[j])
-                    final_file = open(os.path.join(path1,path2), "w" ,encoding="utf-8")
+                    #print("**************",path2)
+                    folder_path = os.path.join(path1,output_path)
+                    final_path = os.path.join(path1,path2)
+                    if os.path.isdir(folder_path):
+                        final_file = open(final_path, "w" ,encoding="utf-8")
+                    else:
+                        os.mkdir(folder_path)
+                        final_file = open(final_path, "w" ,encoding="utf-8")
                     
                     final_file.write(file_data)
                     final_file.close()

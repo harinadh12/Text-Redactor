@@ -1,5 +1,1 @@
 The word count of  redact_names : 91
-The word count of  redact_dates : 22
-The word count of  redact_phones : 1
-The word count of  redact_gender : 27
-The word count of  redact_concept : 62
