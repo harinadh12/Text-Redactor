@@ -115,6 +115,6 @@ The output is written to the .redacted files with same name as innput text file.
 **test_redact_concept.py**  
         •This method is used to test redact concepts functionality. It asserts true if at least 1 word (concept relevant) is masked.
 
-To run test cases, navigate to the tests folder and run pipenv run python -m pytest
-To run the project, navigate to project1 folder and run the below command.
+To run test cases, navigate to the tests folder and run _pipenv run python -m pytest_  
+To run the project, navigate to project1 folder and run the below command.  
 	_pipenv run python main.py --input '*.txt' --names --dates --phones --genders --concept 'court' --output 'files' --stats stderr._
